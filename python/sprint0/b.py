@@ -1,14 +1,18 @@
-from typing import List, Tuple
+def zipper(a: list[int], b: list[int], n: int) -> list[int]:
+    zipper_line = []
+    for _ in range(n):
+        zipper_line.append(a[_])
+        zipper_line.append(b[_])
 
-def zipper(a: List[int], b: List[int]) -> List[int]:
-    # Здесь реализация вашего решения
-    pass
+    return zipper_line
 
-def read_input() -> Tuple[List[int], List[int]]:
+
+def read_input() -> tuple[int, list[int], list[int]]:
     n = int(input())
     a = list(map(int, input().strip().split()))
     b = list(map(int, input().strip().split()))
-    return a, b
+    return n, a, b
 
-a, b = read_input()
-print(" ".join(map(str, zipper(a, b))))
+
+n, a, b = read_input()
+print(" ".join(map(str, zipper(a, b, n))))

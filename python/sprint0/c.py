@@ -1,8 +1,10 @@
 from typing import List, Tuple
 
+
 def moving_average(arr: List[int], window_size: int) -> List[float]:
     # Здесь реализация вашего решения
     pass
+
 
 def read_input() -> Tuple[List[int], int]:
     n = int(input())
