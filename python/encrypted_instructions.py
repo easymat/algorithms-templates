@@ -4,8 +4,9 @@
 Команда: 2[и]3[в]ш.
 Расшифровка: «иивввш».
 
-ID посылки 135296350.
+ID посылки 135373421.
 """
+import string
 import sys
 
 
@@ -17,26 +18,24 @@ def read_input() -> str:
 
 def decrypt(instruction: str) -> str:
     count: str = ''    # Для сбора числа повторений
-    number_of_repeating: list[str] = []    # Стек для количества повторений
     action: str = ''    # Собираем последовательность действий для повторения
-    task: list[str] = []    # Стек для хранения последовательности действий
+    remember: list[tuple[str, str]] = []    # Стек для хранения действий
     # Перебираем все символы в инструкции:
     for symbol in instruction:
         # Если символ является числом, то записываем его в переменную count:
-        if symbol.isdigit():
+        if symbol in string.digits:
             count += symbol
         # Если попалась открывающая скобка:
         elif symbol == '[':
-            # Последовательность из count сохраняем в стек:
-            number_of_repeating.append(count)
-            # Последовательность действий сохраняем в стек:
-            task.append(action)
+            # Ряд действий и количество повторений сохраняем в стек:
+            remember.append((action, count))
             count = ''
             action = ''
         # Если скобка закрылась, повторяем действия в скобках и приписываем
         # к тому, что было за скобками (если было):
         elif symbol == ']':
-            action = task.pop() + action * int(number_of_repeating.pop())
+            task, number_of_repeating = remember.pop()
+            action = task + action * int(number_of_repeating)
         # Если символ является буквой - добавляем в последовательность действий
         else:
             action += symbol
